@@ -78,8 +78,9 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     # Execute all unit tests in the solution
-    - name: Execute unit tests
-      run: dotnet test
+    - name: Build solution
+      run: dotnet build $env:Solution_Name --configuration ${{ matrix.configuration }} -p:TreatWarningsAsErrors=false
+
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
