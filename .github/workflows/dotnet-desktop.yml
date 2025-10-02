@@ -81,7 +81,16 @@ jobs:
     - name: Build solution
       run: dotnet build $env:Solution_Name --configuration ${{ matrix.configuration }} -p:TreatWarningsAsErrors=false
 
-
+    - name: Execute unit tests
+      run: dotnet test $env:Test_Project_Path --configuration ${{ matrix.configuration }} --no-build -p:TreatWarningsAsErrors=false
+      
+    - name: Publish Test Results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: '**/TestResults/*.trx'
+        
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
