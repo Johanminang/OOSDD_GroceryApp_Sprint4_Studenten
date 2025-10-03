@@ -27,7 +27,7 @@ namespace TestCore
             Assert.IsTrue(PasswordHelper.VerifyPassword(password, passwordHash));
         }
 
-        //Unhappy flow
+
         [Test]
         public void TestPasswordHelperReturnsFalse()
         {
@@ -51,5 +51,6 @@ namespace TestCore
 
             Assert.IsFalse(PasswordHelper.VerifyPassword(password, storedHash));
         }
+
     }
 }
